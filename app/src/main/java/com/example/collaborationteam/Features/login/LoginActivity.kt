@@ -1,7 +1,8 @@
-package com.example.collaborationteam
+package com.example.collaborationteam.Features.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.collaborationteam.R
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
