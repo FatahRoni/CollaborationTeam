@@ -8,4 +8,18 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue_default">#2F82FF</color>
+
+    <color name="primaryColor">#278EC8</color>
+    <color name="primaryLightColor">#5BA1CB</color>
+    <color name="primaryDarkColor">#8ABBD5</color>
+    <color name="secondaryColor">#F3F6FD</color>
+    <color name="secondaryTextColor">#EAE9E9</color>
+
+    <color name="warna_background">#F3F7FD</color>
+    <color name="warna_button">#2F82FF</color>
+    <color name="warna_primary_font">#464455</color>
+    <color name="warna_secondary_font">#8D92A3</color>
+
+    <color name="background">#FAFAFC</color>
+    <color name="backgroundsechondary">#8D92A3</color>
 </resources>
