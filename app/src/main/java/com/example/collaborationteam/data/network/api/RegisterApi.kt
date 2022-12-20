@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.IOException
 
-class CredentialApi {
+class RegisterApi {
     fun registerUser(email: String, password: String): Flow<ResponseStatus<RegisterResult>> = flow {
         val model = LoginRegisterModel(email, password)
         try {

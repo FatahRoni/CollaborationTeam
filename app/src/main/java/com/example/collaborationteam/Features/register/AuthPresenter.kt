@@ -3,7 +3,7 @@ package com.example.collaborationteam.Features.login
 import android.util.Log
 import com.example.collaborationteam.Features.register.RegisterView
 import com.example.collaborationteam.data.network.ResponseStatus
-import com.example.collaborationteam.data.network.api.CredentialApi
+import com.example.collaborationteam.data.network.api.RegisterApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -13,8 +13,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class LoginPresenter(
-    private val credentialApi: CredentialApi,
-    private val userPresenter: UserPresenter,
+    private val registerApi: RegisterApi,
     private val uiContext: CoroutineContext = Dispatchers.Main
 ) {
     companion object {
@@ -59,7 +58,7 @@ class LoginPresenter(
     fun register(email: String, password: String) {
         view?.onLoading()
         scope.launch {
-            credentialApi
+            registerApi
                 .registerUser(email, password)
                 .flowOn(Dispatchers.Default)
                 .collectLatest {
@@ -69,21 +68,24 @@ class LoginPresenter(
                     }
                     view?.onFinishedLoading()
                 }
-            Log.d("error","$credentialApi")
+            Log.d("error","$registerApi")
         }
     }
 
-
-    fun getUser() {
+    fun login(email: String, password: String) {
         view?.onLoading()
-        userPresenter.getUser {
-            scope.launch {
-                when(it) {
-                    is ResponseStatus.Success -> view?.onSuccessGetUser(it.data)
-                    is ResponseStatus.Failed -> view?.onError(it.code, it.message)
+        scope.launch {
+            registerApi
+                .registerUser(email, password)
+                .flowOn(Dispatchers.Default)
+                .collectLatest {
+                    when (it) {
+                        is ResponseStatus.Success -> view?.onSuccessRegister()
+                        is ResponseStatus.Failed -> view?.onError(it.code, it.message)
+                    }
+                    view?.onFinishedLoading()
                 }
-                view?.onFinishedLoading()
-            }
+            Log.d("error","$registerApi")
         }
     }
 }

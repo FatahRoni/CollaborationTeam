@@ -11,14 +11,13 @@ import androidx.core.widget.addTextChangedListener
 import com.example.collaborationteam.Features.login.LoginActivity
 import com.example.collaborationteam.Features.login.LoginPresenter
 import com.example.collaborationteam.data.model.UserPagination
-import com.example.collaborationteam.data.network.api.CredentialApi
-import com.example.collaborationteam.Features.login.UserPresenter
+import com.example.collaborationteam.data.network.api.RegisterApi
 import com.example.collaborationteam.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private lateinit var binding : ActivityRegisterBinding
-    private val presenter = LoginPresenter(CredentialApi(), UserPresenter())
+    private val presenter = LoginPresenter(RegisterApi())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +111,6 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         startActivity(Intent(this, LoginActivity::class.java))
         Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
         presenter.register(username, password)
-        presenter.getUser()
     }
 
     override fun onSuccessRegister() {
