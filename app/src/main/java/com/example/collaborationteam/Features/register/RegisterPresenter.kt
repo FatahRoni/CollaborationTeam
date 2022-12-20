@@ -1,9 +1,9 @@
 package com.example.collaborationteam.Features.login
 
+import android.util.Log
 import com.example.collaborationteam.Features.register.RegisterView
 import com.example.collaborationteam.data.network.ResponseStatus
 import com.example.collaborationteam.data.network.api.CredentialApi
-import com.example.collaborationteam.data.network.api.UserApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -14,7 +14,7 @@ import kotlin.coroutines.CoroutineContext
 
 class LoginPresenter(
     private val credentialApi: CredentialApi,
-    private val userApi: UserApi,
+    private val userPresenter: UserPresenter,
     private val uiContext: CoroutineContext = Dispatchers.Main
 ) {
     companion object {
@@ -69,13 +69,14 @@ class LoginPresenter(
                     }
                     view?.onFinishedLoading()
                 }
+            Log.d("error","$credentialApi")
         }
     }
 
 
     fun getUser() {
         view?.onLoading()
-        userApi.getUser {
+        userPresenter.getUser {
             scope.launch {
                 when(it) {
                     is ResponseStatus.Success -> view?.onSuccessGetUser(it.data)

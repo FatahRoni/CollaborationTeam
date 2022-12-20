@@ -1,10 +1,11 @@
-package com.example.collaborationteam.data.network.api
+package com.example.collaborationteam.Features.login
 
 import com.example.collaborationteam.data.model.AddUserModel
 import com.example.collaborationteam.data.model.AddUserResponse
 import com.example.collaborationteam.data.model.User
 import com.example.collaborationteam.data.model.UserPagination
 import com.example.collaborationteam.data.network.ResponseStatus
+import com.example.collaborationteam.data.network.api.NetworkClient
 import com.example.collaborationteam.data.network.deserializeJson
 import com.example.collaborationteam.data.network.mapFailedResponse
 import com.example.collaborationteam.data.network.serialized
@@ -14,11 +15,10 @@ import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
 
-class UserApi {
+class UserPresenter {
     private val usersEndpoint = "/users"
     fun getUser(onResponse: (ResponseStatus<UserPagination>) -> Unit) {
-        NetworkClient
-            .client
+        NetworkClient.client
             .newCall(
                 NetworkClient.requestBuilder(usersEndpoint)
             )
@@ -48,8 +48,7 @@ class UserApi {
     fun getUserPagination(pages: Int = 1, onResponse: (ResponseStatus<List<User>>) -> Unit) {
         val endpoint = "$usersEndpoint${if (pages > 1) "?page=$pages" else ""}"
         val request = NetworkClient.requestBuilder(endpoint)
-        NetworkClient
-            .client
+        NetworkClient.client
             .newCall(request)
             .enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
@@ -83,8 +82,7 @@ class UserApi {
     }
 
     fun getError(onResponse: (ResponseStatus<Nothing>) -> Unit) {
-        NetworkClient
-            .client
+        NetworkClient.client
             .newCall(NetworkClient.requestBuilder("/unknown/23"))
             .enqueue(object: Callback {
                 override fun onFailure(call: Call, e: IOException) {
@@ -99,10 +97,12 @@ class UserApi {
     }
 
     fun addUser(data: AddUserModel, onResponse: (ResponseStatus<AddUserResponse>) -> Unit) {
-        val request = NetworkClient
-            .requestBuilder(usersEndpoint, NetworkClient.METHOD.POST, data.serialized())
-        NetworkClient
-            .client
+        val request = NetworkClient.requestBuilder(
+            usersEndpoint,
+            NetworkClient.METHOD.POST,
+            data.serialized()
+        )
+        NetworkClient.client
             .newCall(request)
             .enqueue(object: Callback {
                 override fun onFailure(call: Call, e: IOException) {

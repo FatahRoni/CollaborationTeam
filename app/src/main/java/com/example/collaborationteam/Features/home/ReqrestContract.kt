@@ -1,4 +1,4 @@
-package com.example.collaborationteam.Features.register
+package com.example.collaborationteam.Features.home
 
 import com.example.collaborationteam.data.model.User
 
