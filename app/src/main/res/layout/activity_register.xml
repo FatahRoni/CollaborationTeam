@@ -75,8 +75,8 @@
         app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivSetImage"
-        app:shapeAppearanceOverlay="@style/Button">
+        app:layout_constraintTop_toBottomOf="@+id/ivSetImage">
+<!--        app:shapeAppearanceOverlay="@style/Button"-->
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etUsername"
@@ -106,8 +106,8 @@
         app:hintTextColor="@color/warna_primary_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        app:shapeAppearanceOverlay="@style/Button">
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+<!--        app:shapeAppearanceOverlay="@style/Button"-->
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmail"
@@ -138,9 +138,8 @@
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-        app:shapeAppearanceOverlay="@style/Button">
-
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+<!--        app:shapeAppearanceOverlay="@style/Button"-->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
@@ -172,8 +171,8 @@
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout"
-        app:shapeAppearanceOverlay="@style/Button">
+        app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout">
+<!--        app:shapeAppearanceOverlay="@style/Button"-->
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etConfPassword"
