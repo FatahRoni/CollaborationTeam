@@ -3,7 +3,9 @@ package com.example.collaborationteam.Features.login
 import android.util.Log
 import com.example.collaborationteam.Features.register.RegisterView
 import com.example.collaborationteam.data.network.ResponseStatus
+import com.example.collaborationteam.data.network.api.LoginApi
 import com.example.collaborationteam.data.network.api.RegisterApi
+import com.example.collaborationteam.data.network.api.ReqresApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -14,6 +16,7 @@ import kotlin.coroutines.CoroutineContext
 
 class LoginPresenter(
     private val registerApi: RegisterApi,
+    private val loginApi: LoginApi,
     private val uiContext: CoroutineContext = Dispatchers.Main
 ) {
     companion object {
@@ -45,7 +48,7 @@ class LoginPresenter(
 
         val isUsernameValid = userName.length > 5
 
-        if (isPasswordValid && isUsernameValid) { view?.onSuccessLogin(username = "", password = "") }
+        if (isPasswordValid && isUsernameValid) { view?.onSuccessLogin() }
 
         if (!isUsernameValid) { view?.onError(0,"invalid username") }
         if (!isPasswordValid) { view?.onError(1,"invalid password") }
@@ -75,17 +78,17 @@ class LoginPresenter(
     fun login(email: String, password: String) {
         view?.onLoading()
         scope.launch {
-            registerApi
-                .registerUser(email, password)
+            loginApi
+                .loginUser(email, password)
                 .flowOn(Dispatchers.Default)
                 .collectLatest {
                     when (it) {
-                        is ResponseStatus.Success -> view?.onSuccessRegister()
+                        is ResponseStatus.Success -> view?.onSuccessLogin()
                         is ResponseStatus.Failed -> view?.onError(it.code, it.message)
                     }
                     view?.onFinishedLoading()
                 }
-            Log.d("error","$registerApi")
+            Log.d("error-login","$loginApi")
         }
     }
 }

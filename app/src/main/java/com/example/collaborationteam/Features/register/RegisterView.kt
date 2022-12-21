@@ -8,7 +8,7 @@ interface RegisterView {
     fun onError(code: Int, message: String)
     fun onErrorPassword(visible: Boolean, message: String)
     fun resetPasswordError()
-    fun onSuccessLogin(username: String, password: String)
+    fun onSuccessLogin()
     fun onSuccessGetUser(user: UserPagination)
     fun onSuccessRegister()
 }

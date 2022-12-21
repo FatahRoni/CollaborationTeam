@@ -15,7 +15,7 @@ import java.io.IOException
 class ReqresApi {
     private val usersEndpoint ="/users"
     fun getUser(onResponse: (ResponseStatus<User>)-> Unit){
-        NetworkClient
+        NetworkClientReqres
             .client
             .newCall(
                 NetworkClientReqres.requestBuilder(usersEndpoint)
@@ -44,7 +44,7 @@ class ReqresApi {
     fun getUserPagination(pages: Int = 1, onResponse: (ResponseStatus<List<User>>) -> Unit){
         val endpoint = "$usersEndpoint ${if (pages > 1) "?page=$pages" else ""}"
         val request = NetworkClientReqres.requestBuilder(endpoint)
-        NetworkClient
+        NetworkClientReqres
             .client
             .newCall(request)
             .enqueue(object : Callback {
@@ -100,8 +100,8 @@ class ReqresApi {
 
     fun addUser(data: AddUserModel, onResponse: (ResponseStatus<AddUserResponse>) -> Unit) {
         val request =
-            NetworkClientReqres.requestBuilder(usersEndpoint, METHOD.POST, data.serialized())
-        NetworkClient
+            NetworkClientReqres.requestBuilder(usersEndpoint, NetworkClientReqres.METHOD.POST, data.serialized())
+        NetworkClientReqres
             .client
             .newCall(request)
             .enqueue(object: Callback {

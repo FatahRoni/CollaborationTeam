@@ -11,21 +11,22 @@ import androidx.core.widget.addTextChangedListener
 import com.example.collaborationteam.Features.login.LoginActivity
 import com.example.collaborationteam.Features.login.LoginPresenter
 import com.example.collaborationteam.data.model.UserPagination
+import com.example.collaborationteam.data.network.api.LoginApi
 import com.example.collaborationteam.data.network.api.RegisterApi
 import com.example.collaborationteam.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
 
     private lateinit var binding : ActivityRegisterBinding
-    private val presenter = LoginPresenter(RegisterApi())
+    private val presenter = LoginPresenter(RegisterApi(), LoginApi())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.btnRegister.setOnClickListener {
-            presenter.validateCredential(
-                binding.etUsername.text.toString(),
+            presenter.register(
+                binding.etEmail.text.toString(),
                 binding.etPassword.text.toString()
             )
         }
@@ -107,13 +108,14 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             .show()
     }
 
-    override fun onSuccessLogin(username: String, password: String) {
-        startActivity(Intent(this, LoginActivity::class.java))
+    override fun onSuccessLogin() {
         Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
-        presenter.register(username, password)
+
     }
 
     override fun onSuccessRegister() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        presenter.register("","")
         Toast.makeText(this, "Success Register", Toast.LENGTH_SHORT).show()
     }
 
