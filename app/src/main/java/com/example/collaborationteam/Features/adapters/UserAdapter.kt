@@ -21,7 +21,6 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.ViewHolder>() {
         holder.setData(data[position])
     }
 
-
     override fun getItemCount(): Int = data.size
 
     fun submitList(list: List<User>){

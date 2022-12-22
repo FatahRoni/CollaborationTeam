@@ -88,7 +88,6 @@ class LoginActivity : AppCompatActivity(), RegisterView {
     override fun onSuccessLogin(username: String, password: String) {
         startActivity(Intent(this, MainActivity::class.java))
         Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
-        presenter.login("","")
         finish()
     }
 

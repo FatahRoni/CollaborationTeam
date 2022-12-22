@@ -15,35 +15,8 @@ import java.io.IOException
 class ReqresApi {
     private val usersEndpoint ="/users"
 
-    fun getUser(onResponse: (ResponseStatus<User>)-> Unit){
-        NetworkClientReqres
-            .client
-            .newCall(
-                NetworkClientReqres.requestBuilder(usersEndpoint)
-            )
-            .enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    onResponse.invoke(ResponseStatus.Failed(1,e.message.toString(), e))
-                }
-
-                override fun onResponse(call: Call, response: Response) {
-                    if (response.isSuccessful){
-                        val body = JSONObject(response.body?.string()?: "")
-                        onResponse.invoke(
-                            ResponseStatus.Success(User(avatar = "", id = 0, email = "", lastName = "", firstName = ""))
-                        )
-                    } else {
-                        onResponse.invoke(
-                            ResponseStatus.Failed(response.code,"Failed")
-                        )
-                    }
-                }
-
-            })
-    }
-
     fun getUserPagination(pages: Int = 1, onResponse: (ResponseStatus<List<User>>) -> Unit){
-        val endpoint = "$usersEndpoint ${if (pages > 1) "?page=$pages" else ""}?delay=100000"
+        val endpoint = "$usersEndpoint${if (pages > 1) "?page=$pages" else ""}?delay=100000"
         val request = NetworkClientReqres.requestBuilder(endpoint)
         NetworkClientReqres
             .client

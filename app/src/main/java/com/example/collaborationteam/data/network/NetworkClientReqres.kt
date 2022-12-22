@@ -1,6 +1,7 @@
 package com.example.collaborationteam.data.network
 
-import androidx.viewbinding.BuildConfig
+
+import com.example.collaborationteam.BuildConfig
 import okhttp3.*
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
