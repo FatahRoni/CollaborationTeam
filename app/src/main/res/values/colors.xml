@@ -22,4 +22,7 @@
 
     <color name="background">#FAFAFC</color>
     <color name="backgroundsechondary">#8D92A3</color>
+
+    <color name="bgShimmer">#EAF0F7</color>
+    <color name="bgDefault">#F4F7FB</color>
 </resources>

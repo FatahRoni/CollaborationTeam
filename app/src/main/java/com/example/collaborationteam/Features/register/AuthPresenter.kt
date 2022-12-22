@@ -86,9 +86,10 @@ class LoginPresenter(
                         is ResponseStatus.Success -> view?.onSuccessLogin()
                         is ResponseStatus.Failed -> view?.onError(it.code, it.message)
                     }
-                    view?.onFinishedLoading()
+
                 }
             Log.d("error-login","$loginApi")
         }
+        view?.onFinishedLoading()
     }
 }

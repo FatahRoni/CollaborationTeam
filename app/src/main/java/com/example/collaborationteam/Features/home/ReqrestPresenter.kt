@@ -10,7 +10,7 @@ class ReqrestPresenter (
     private val view: ReqrestContract.View,
     private val api: ReqresApi,
     uiContext: CoroutineContext = Dispatchers.Main
-): ReqrestContract.Presenter {
+): ReqrestContract.Presenter{
     private val supervisorJob: Job = SupervisorJob()
     private val scope = CoroutineScope(supervisorJob + uiContext)
 
