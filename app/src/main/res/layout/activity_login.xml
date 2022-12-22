@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="20dp"
     tools:context=".Features.login.LoginActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -19,6 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bank Sephora"
+        android:textSize="25sp"
+        android:layout_marginStart="10dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guidelineLogin" />
@@ -28,6 +29,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bankSephora"
         android:layout_marginTop="91dp"/>
@@ -36,6 +39,8 @@
         android:id="@+id/txtsilahkanMasuk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textSize="20sp"
         android:text="Silahkan masukkan username dan password terdaftar Anda untuk melakukan login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLogin"
@@ -67,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
                 android:hint="Email"
+                android:paddingStart="10dp"
                 android:textColor="@color/black"
                 android:background="@drawable/bg_login"
                 android:layout_marginEnd="15dp"/>
@@ -77,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
                 android:hint="Password"
+                android:paddingStart="10dp"
                 android:textColor="@color/black"
                 android:background="@drawable/bg_login"
                 android:layout_marginTop="20dp"

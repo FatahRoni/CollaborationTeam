@@ -9,8 +9,6 @@ import java.util.concurrent.TimeUnit
 class NetworkClientReqres {
     companion object {
         const val BASE_URL = "https://reqres.in/api"
-
-
         private val headerInterceptor: Interceptor = Interceptor {
             val request = it.request().newBuilder()
             request
@@ -26,7 +24,8 @@ class NetworkClientReqres {
                 .addInterceptor(
                     HttpLoggingInterceptor().apply {
                         level =
-                            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+                            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+                            else HttpLoggingInterceptor.Level.NONE
                     }
                 )
                 .callTimeout(timeout = 5L, unit = TimeUnit.SECONDS)

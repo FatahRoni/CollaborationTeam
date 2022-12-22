@@ -17,6 +17,7 @@ import kotlin.coroutines.CoroutineContext
 class LoginPresenter(
     private val registerApi: RegisterApi,
     private val loginApi: LoginApi,
+
     private val uiContext: CoroutineContext = Dispatchers.Main
 ) {
     companion object {
@@ -48,7 +49,7 @@ class LoginPresenter(
 
         val isUsernameValid = userName.length > 5
 
-        if (isPasswordValid && isUsernameValid) { view?.onSuccessLogin() }
+        if (isPasswordValid && isUsernameValid) { view?.onSuccessLogin(username = "", password = "") }
 
         if (!isUsernameValid) { view?.onError(0,"invalid username") }
         if (!isPasswordValid) { view?.onError(1,"invalid password") }
@@ -69,8 +70,8 @@ class LoginPresenter(
                         is ResponseStatus.Success -> view?.onSuccessRegister()
                         is ResponseStatus.Failed -> view?.onError(it.code, it.message)
                     }
-                    view?.onFinishedLoading()
                 }
+            view?.onFinishedLoading()
             Log.d("error","$registerApi")
         }
     }
@@ -83,13 +84,13 @@ class LoginPresenter(
                 .flowOn(Dispatchers.Default)
                 .collectLatest {
                     when (it) {
-                        is ResponseStatus.Success -> view?.onSuccessLogin()
+                        is ResponseStatus.Success -> view?.onSuccessLogin("","")
                         is ResponseStatus.Failed -> view?.onError(it.code, it.message)
                     }
 
                 }
+            view?.onFinishedLoading()
             Log.d("error-login","$loginApi")
         }
-        view?.onFinishedLoading()
     }
 }

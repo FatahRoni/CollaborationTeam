@@ -18,6 +18,7 @@ import com.example.collaborationteam.databinding.ActivityLoginBinding
 class LoginActivity : AppCompatActivity(), RegisterView {
     private lateinit var binding : ActivityLoginBinding
     private var presenter = LoginPresenter(RegisterApi(), LoginApi())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -60,11 +61,10 @@ class LoginActivity : AppCompatActivity(), RegisterView {
     }
 
     override fun resetPasswordError() {
-        null
+
     }
 
     override fun onErrorPassword(visible: Boolean, message: String) {
-        null
 
     }
 
@@ -85,10 +85,11 @@ class LoginActivity : AppCompatActivity(), RegisterView {
             .show()
     }
 
-    override fun onSuccessLogin() {
+    override fun onSuccessLogin(username: String, password: String) {
         startActivity(Intent(this, MainActivity::class.java))
         Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
         presenter.login("","")
+        finish()
     }
 
     override fun onSuccessRegister() {

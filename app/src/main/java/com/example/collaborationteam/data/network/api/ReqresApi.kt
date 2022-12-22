@@ -14,6 +14,7 @@ import java.io.IOException
 
 class ReqresApi {
     private val usersEndpoint ="/users"
+
     fun getUser(onResponse: (ResponseStatus<User>)-> Unit){
         NetworkClientReqres
             .client
@@ -42,7 +43,7 @@ class ReqresApi {
     }
 
     fun getUserPagination(pages: Int = 1, onResponse: (ResponseStatus<List<User>>) -> Unit){
-        val endpoint = "$usersEndpoint ${if (pages > 1) "?page=$pages" else ""}"
+        val endpoint = "$usersEndpoint ${if (pages > 1) "?page=$pages" else ""}?delay=100000"
         val request = NetworkClientReqres.requestBuilder(endpoint)
         NetworkClientReqres
             .client
@@ -63,8 +64,6 @@ class ReqresApi {
                         val userPagination =
                             deserializeJson<UserPagination>(response.body?.string() ?: "")
                                 ?: UserPagination()
-//                        val adapter = MoshiExtension.moshi.adapter(UserPagination::class.java)
-//                        val dataPagination: UserPagination = adapter.fromJson(response.body?.string() ?: "") ?: UserPagination()
                         onResponse.invoke(
                             ResponseStatus.Success(
                                 data = userPagination.data,

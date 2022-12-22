@@ -24,17 +24,25 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        presenter.onAttach(this)
+        formValidataion()
+
         binding.btnRegister.setOnClickListener {
             presenter.register(
                 binding.etEmail.text.toString(),
                 binding.etPassword.text.toString()
+            )
+            presenter.validateCredential(
+                binding.etUsername.text.toString(),
+                binding.etPassword.text.toString()
+
             )
         }
 
         binding.ivBackDetail.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
-        presenter.onAttach(this)
 
         binding.etPassword.addTextChangedListener {
             validateInput()
@@ -48,6 +56,19 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             validateInput()
         }
 
+    }
+
+    private fun formValidataion(){
+        binding.etConfPassword.addTextChangedListener { confirmPassword ->
+            if (confirmPassword.toString() != binding.etPassword.text.toString()){
+                binding.btnRegister.isClickable = false
+                binding.passwordConfInputLayout.isEndIconVisible = false
+                binding.etConfPassword.error ="Confirm password is not match"
+            }else{
+                binding.btnRegister.isClickable = true
+                binding.passwordConfInputLayout.isEndIconVisible = true
+            }
+        }
     }
 
     private fun validateInput() {
@@ -89,6 +110,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
     override fun onErrorPassword(visible: Boolean, message: String) {
         binding.tvCheckValidate.text = message
         binding.tvCheckValidate.isVisible = visible
+        Toast.makeText(this, "Gagal Register", Toast.LENGTH_SHORT).show()
     }
 
     private fun dialogClickListener(dialogInterface: DialogInterface, button: Int) {
@@ -108,8 +130,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
             .show()
     }
 
-    override fun onSuccessLogin() {
-        Toast.makeText(this, "Success Login", Toast.LENGTH_SHORT).show()
+    override fun onSuccessLogin(username: String, password: String) {
 
     }
 

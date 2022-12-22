@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity(),ReqrestContract.View {
 
     private lateinit var binding : ActivityMainBinding
     private val adapter: UserAdapter by lazy { UserAdapter() }
+
     private val recipeLiveData = MutableLiveData<List<User>>(listOf())
     private lateinit var presenter: ReqrestPresenter
 
